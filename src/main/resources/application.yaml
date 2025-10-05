@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: restapidemo
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bbook
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 9090
+
+google:
+  oauth2:
+    client-id: 439361256105-33rgjovkbdm9eff9snapo4rd32quvrgf.apps.googleusercontent.com
+
+app:
+  jwt:
+    secret: sidramesh
+    issuer: your-app
+    expiration-minutes: 60
+  frontend:
+    origin: http://localhost:5173
+  cookie:
+    name: APP_SESSION
+    secure: false    # set true in production
+    sameSite: lax

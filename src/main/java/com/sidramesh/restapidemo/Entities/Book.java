@@ -1,9 +1,6 @@
 package com.sidramesh.restapidemo.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Book {
@@ -13,6 +10,9 @@ public class Book {
     private String name;
     private String author;
     private String isbn;
+
+    @Column(name = "owner_id", nullable = false)
+    private Long ownerId; // internal user id from users.id
 
     public Book(long id, String name, String author, String isbn) {
         this.id = id;
@@ -27,6 +27,14 @@ public class Book {
 
     public String getName() {
         return name;
+    }
+
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getAuthor() {

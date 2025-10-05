@@ -8,26 +8,22 @@ import java.util.List;
 
 @Service
 public class BookService {
-    private final BookRepository repository;
+    private final BookRepository repo;
 
-    public BookService(BookRepository bookRepository) {
-        this.repository = bookRepository;
+    public BookService(BookRepository repo) { this.repo = repo; }
+
+    public List<Book> findByOwnerId(Long ownerId) {
+        return repo.findByOwnerId(ownerId);
     }
 
-    public List<Book> findAll(){
-       return this.repository.findAll();
+    public Book findByIdAndOwnerId(Long id, Long ownerId) {
+        return repo.findByIdAndOwnerId(id, ownerId).orElse(null);
     }
 
-    public Book findById(long id){
-        return this.repository.findById(id).orElse(null);
+    public Book createForUser(Long ownerId, Book book) {
+        book.setOwnerId(ownerId);
+        return repo.save(book);
     }
 
-    public Book save(Book book){
-        return this.repository.save(book);
-    }
-
-    public void delete(long id){
-        this.repository.deleteById(id);
-    }
-
+    // keep any existing generic methods if you want, but controller should prefer owner-scoped methods
 }
